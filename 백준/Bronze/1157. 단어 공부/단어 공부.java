@@ -1,0 +1,27 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        String word = sc.next();
+        int[] visited = new int[26];
+        char maxWord = 0;
+        int max = 0;
+
+        for (int i = 0; i < word.length(); i++) {
+            char wordAt = Character.toUpperCase(word.charAt(i));
+            visited[wordAt - 'A']++;
+        }
+
+        for (int i = 0; i < 26; i++) {
+            if (visited[i] > max) {
+                max = visited[i];
+                maxWord = (char)(i + 'A');
+            } else if (visited[i] == max) {
+                maxWord = '?';
+            }
+        }
+        System.out.println(maxWord);
+    }
+}
