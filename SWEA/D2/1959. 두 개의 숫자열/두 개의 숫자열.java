@@ -4,10 +4,9 @@ import java.io.InputStreamReader;
 import java.util.*;
 
 public class Solution {
-    static int[] big, small;
-
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder sb = new StringBuilder();
 
         int T = Integer.parseInt(br.readLine());
 
@@ -20,35 +19,29 @@ public class Solution {
             StringTokenizer st2 = new StringTokenizer(br.readLine(), " ");
             StringTokenizer st3 = new StringTokenizer(br.readLine(), " ");
 
-            int[] tmp1 = new int[N];
-            for (int i = 0; i < N; i++) tmp1[i] = Integer.parseInt(st2.nextToken());
+            int[] arr1 = new int[N];
+            for (int i = 0; i < N; i++) arr1[i] = Integer.parseInt(st2.nextToken());
 
-            int[] tmp2 = new int[M];
-            for (int i = 0; i < M; i++) tmp2[i] = Integer.parseInt(st3.nextToken());
+            int[] arr2 = new int[M];
+            for (int i = 0; i < M; i++) arr2[i] = Integer.parseInt(st3.nextToken());
 
 
-            int bigger = Math.max(N, M);
-            int smaller = Math.min(N, M);
-            if (bigger == N) {
-                big = tmp1.clone();
-                small = tmp2.clone();
-            } else {
-                big = tmp2.clone();
-                small = tmp1.clone();
-            }
+            int[] big = N >= M ? arr1 : arr2;
+            int[] small = N >= M ? arr2 : arr1;
 
             int sum = Integer.MIN_VALUE;
-            for (int i = 0; i <= bigger - smaller; i++) {
+            for (int i = 0; i <= big.length - small.length; i++) {
                 int tmp = 0;
-                for (int j = 0; j < smaller; j++) {
+                for (int j = 0; j < small.length; j++) {
                     tmp += big[i + j] * small[j];
                 }
                 sum = Math.max(sum, tmp);
             }
 
 
-            System.out.println("#" + testCase + " " + sum);
+            sb.append("#").append(testCase).append(" ").append(sum).append("\n");
 
         }
+        System.out.println(sb);
     }
 }
