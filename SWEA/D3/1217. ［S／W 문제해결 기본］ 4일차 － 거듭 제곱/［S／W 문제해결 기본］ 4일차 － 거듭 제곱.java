@@ -1,9 +1,9 @@
 import java.util.Scanner;
 
 public class Solution {
-	static int pow(int start, int num, int p) {
-		if(p==0) return start/num;
-		else return pow(start*num, num, p-1);
+	static int pow(int num, int p) {
+		if(p==0) return 1;
+		else return num * pow(num, p-1);
 	}
 	
 	public static void main(String[] args) {
@@ -16,7 +16,7 @@ public class Solution {
 			int num = sc.nextInt();
 			int p = sc.nextInt();
 			
-			int answer = pow(num, num, p);
+			int answer = pow(num, p);
 			System.out.println("#"+tc+" "+answer);
 		}
 	}
