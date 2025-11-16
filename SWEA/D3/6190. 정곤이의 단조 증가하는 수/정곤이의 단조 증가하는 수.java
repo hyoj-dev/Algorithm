@@ -22,8 +22,6 @@ public class Solution {
 					int mult = arr[i] * arr[j];
 					String num = String.valueOf(mult);
 					
-					if(num.length() < 2) continue;
-					
 					boolean flag = true;
 					
 					for(int k = 0; k < num.length()-1 ;k++) {
