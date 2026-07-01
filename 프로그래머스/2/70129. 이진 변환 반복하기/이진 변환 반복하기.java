@@ -4,15 +4,13 @@ class Solution {
     public int[] solution(String s) {
         int cnt = 0, one = 0, rmZero = 0;
         
-        String binaryString = s;
-        
-        while(!binaryString.equals("1")) {
-            for (char c : binaryString.toCharArray()) {
+        while(!s.equals("1")) {
+            for (char c : s.toCharArray()) {
                 if(c == '1') one++;
                 else rmZero++;
             }
             
-            binaryString = Integer.toBinaryString(one);
+            s = Integer.toBinaryString(one);
             cnt++;
             one = 0;
         }
