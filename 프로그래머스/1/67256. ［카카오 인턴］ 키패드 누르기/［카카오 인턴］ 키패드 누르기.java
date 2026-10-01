@@ -1,37 +1,38 @@
 import java.util.*;
 
 class Solution {
-    int[] left = {3, 0}, right = {3, 2};
+    int[] left, right;
     
     public String solution(int[] numbers, String hand) {
         StringBuilder answer = new StringBuilder();
-        
+        left = new int[] {3, 0};
+        right = new int[] {3, 2};
         
         for(int num : numbers) {
             int[] nowPos = toPos(num);
             
             if(num == 1 || num == 4 || num == 7) {
-                changePos('L', nowPos);
+                changePos(left, nowPos);
                 answer.append("L");
             } else if (num == 3 || num == 6 || num == 9) {
-                changePos('R', nowPos);
+                changePos(right, nowPos);
                 answer.append("R");
             } else {
                 int leftDist = calcDist(left, nowPos);
                 int rightDist = calcDist(right, nowPos);
                 
                 if(leftDist < rightDist) {
-                    changePos('L', nowPos);
+                    changePos(left, nowPos);
                     answer.append("L");
                 } else if(leftDist > rightDist) {
-                    changePos('R', nowPos);
+                    changePos(right, nowPos);
                     answer.append("R");
                 } else {
                     if(hand.equals("left")) {
-                        changePos('L', nowPos);
+                        changePos(left, nowPos);
                         answer.append("L");
                     } else {
-                        changePos('R', nowPos);
+                        changePos(right, nowPos);
                         answer.append("R");
                     }
                 }
@@ -53,13 +54,8 @@ class Solution {
         };
     }
     
-    public void changePos(char flag, int[] nowPos) {
-        if(flag == 'L') {
-            left[0] = nowPos[0];
-            left[1] = nowPos[1];
-        } else {
-            right[0] = nowPos[0];
-            right[1] = nowPos[1];
-        }
+    public void changePos(int[] whichHand, int[] nowPos) {
+        whichHand[0] = nowPos[0];
+        whichHand[1] = nowPos[1];
     }
 }
