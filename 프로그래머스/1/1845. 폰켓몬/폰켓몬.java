@@ -2,12 +2,26 @@ import java.util.*;
 
 class Solution {
     public int solution(int[] nums) {
-        Set<Integer> set = new HashSet<>();
+        HashMap<Integer, Integer> map = new HashMap<>();
+        HashSet<Integer> set = new HashSet<>();
         
-        for (int n : nums) {
-            set.add(n);
+        int answer = 0;
+        int limit = nums.length / 2; 
+        
+        for(int num : nums) {
+            map.put(num, map.getOrDefault(num, 0) + 1);
         }
         
-        return Math.min(set.size(), nums.length / 2);
+        for(int key : map.keySet()) {
+            if(map.get(key) >= 1 && !set.contains(key)) {
+                if(limit > answer) {
+                    answer++;
+                    set.add(key);
+                    map.put(key, map.get(key) - 1);
+                }
+            }
+        }
+        
+        return answer;
     }
 }
